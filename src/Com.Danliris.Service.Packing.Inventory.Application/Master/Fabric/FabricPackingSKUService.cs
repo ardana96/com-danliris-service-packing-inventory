@@ -587,6 +587,7 @@ namespace Com.Danliris.Service.Packing.Inventory.Application.Master.Fabric
                     packingCodes.Add(latestProductPacking.Code);
                     packingModel.Id = latestProductPacking.Id;
                     //packingModel.Code = latestProductPacking.Code;
+
                 }
 
                 //if (packingCodes.Count < 1 )
