@@ -155,8 +155,7 @@ using Com.Danliris.Service.Packing.Inventory.Application.ToBeRefactored.GarmentS
 
 using Com.Danliris.Service.Packing.Inventory.Infrastructure.Repositories.GarmentShipping.SalesExport;
 using Com.Danliris.Service.Packing.Inventory.Application.ToBeRefactored.GarmentShipping.SalesExport;
-
-
+using Com.Danliris.Service.Packing.Inventory.Application.ToBeRefactored.DyeingPrintingWarehouse.IN;
 
 namespace Com.Danliris.Service.Packing.Inventory.WebApi
 {
@@ -409,6 +408,7 @@ namespace Com.Danliris.Service.Packing.Inventory.WebApi
             services.AddTransient<IOmzetYearMarketingService, OmzetYearMarketingService>();
             services.AddTransient<IStockOpnameMutationService, StockOpnameMutationService>();
             services.AddTransient<IStockOpnameSummaryService, StockOpnameSummaryService>();
+            services.AddTransient<IDPWarehouseInService, DPWarehouseInService>();
 
             services.AddTransient<IGarmentShippingExportSalesContractService, GarmentShippingExportSalesContractService>();
             services.AddTransient<IGarmentExportCoverLetterService, GarmentExportCoverLetterService>();

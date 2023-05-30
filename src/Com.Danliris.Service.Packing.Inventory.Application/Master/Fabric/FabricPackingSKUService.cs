@@ -546,7 +546,9 @@ namespace Com.Danliris.Service.Packing.Inventory.Application.Master.Fabric
             {
 
                 var productSKU = _dbContext.ProductSKUs.FirstOrDefault(entity => entity.Id == fabric.ProductSKUId);
-                var latestProductPacking = _dbContext.ProductPackings.Where(entity => entity.Code.Contains(productSKU.Code) && entity.PackingSize == form.Length && entity.PackingType == form.PackingType).OrderByDescending(entity => entity.Id).FirstOrDefault();
+                var description = (form.Description.ToLower()).Replace(" ", "");
+                //var latestProductPacking = _dbContext.ProductPackings.Where(entity => entity.Code.Contains(productSKU.Code) && entity.PackingSize == form.Length && entity.PackingType == form.PackingType).OrderByDescending(entity => entity.Id).FirstOrDefault();
+                var latestProductPacking = _dbContext.ProductPackings.Where(entity => entity.Code.Contains(productSKU.Code) && entity.PackingSize == form.Length && entity.PackingType == form.PackingType && (entity.Description.ToLower()).Replace(" ", "") == description).OrderByDescending(entity => entity.Id).FirstOrDefault();
                 var latestProductPackingSKU = _dbContext.ProductPackings.Where(entity => entity.Code.Contains(productSKU.Code)).OrderByDescending(entity => entity.Id).FirstOrDefault();
                 var packingModel = new ProductPackingModel();
                 var fabricPackingProduct = new FabricProductPackingModel();
@@ -571,7 +573,7 @@ namespace Com.Danliris.Service.Packing.Inventory.Application.Master.Fabric
                     {
                         var code = productSKU.Code + i.ToString().PadLeft(4, '0');
                         var uom = _dbContext.IPUnitOfMeasurements.FirstOrDefault(entity => entity.Unit == form.PackingType);
-                        packingModel = new ProductPackingModel(productSKU.Id, uom.Id, form.Length, code, code, "", form.PackingType, true);
+                        packingModel = new ProductPackingModel(productSKU.Id, uom.Id, form.Length, code, code, form.Description, form.PackingType, true);
                         _unitOfWork.ProductPackings.Insert(packingModel);
                         _unitOfWork.Commit();
                         packingCodes.Add(code);
@@ -602,7 +604,7 @@ namespace Com.Danliris.Service.Packing.Inventory.Application.Master.Fabric
 
                 //return new FabricPackingIdCodeDto() { FabricPackingId = fabricPackingProduct.Id, ProductPackingCode = packingModel.Code, ProductPackingId = packingModel.Id, FabricSKUId = fabric.Id, ProductSKUCode = productSKU.Code, ProductSKUId = productSKU.Id, ProductPackingCodes = packingCodes };
                 return new FabricPackingIdCodeDto() { FabricPackingId = fabricPackingProduct.Id, ProductPackingCode = packingCodes.First(), ProductPackingId = packingModel.Id, FabricSKUId = fabric.Id, ProductSKUCode = productSKU.Code, ProductSKUId = productSKU.Id, ProductPackingCodes = packingCodes };
-
+ 
             }
             else
             {
