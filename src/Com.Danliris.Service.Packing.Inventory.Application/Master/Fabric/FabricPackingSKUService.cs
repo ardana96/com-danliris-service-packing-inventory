@@ -312,8 +312,8 @@ namespace Com.Danliris.Service.Packing.Inventory.Application.Master.Fabric
                 processTypeId = 0;
             }
 
-            var yearCode = CodeConstructionHelper.GetYearCode(DateTime.Now.Year);
-            //var yearCode = CodeConstructionHelper.GetYearCode(form.CreatedUtcOrderNo.Year);
+            //var yearCode = CodeConstructionHelper.GetYearCode(DateTime.Now.Year);
+            var yearCode = CodeConstructionHelper.GetYearCode(form.CreatedUtcOrderNo.Year);
             code += yearCode;
 
             var sppNo = form.ProductionOrderNo.Substring(form.ProductionOrderNo.Length - 4);
@@ -546,7 +546,7 @@ namespace Com.Danliris.Service.Packing.Inventory.Application.Master.Fabric
             {
 
                 var productSKU = _dbContext.ProductSKUs.FirstOrDefault(entity => entity.Id == fabric.ProductSKUId);
-                var description = (form.Description.ToLower()).Replace(" ", "");
+                var description = form.Description != null? (form.Description.ToLower()).Replace(" ", ""): null;
                 //var latestProductPacking = _dbContext.ProductPackings.Where(entity => entity.Code.Contains(productSKU.Code) && entity.PackingSize == form.Length && entity.PackingType == form.PackingType).OrderByDescending(entity => entity.Id).FirstOrDefault();
                 var latestProductPacking = _dbContext.ProductPackings.Where(entity => entity.Code.Contains(productSKU.Code) && entity.PackingSize == form.Length && entity.PackingType == form.PackingType && (entity.Description.ToLower()).Replace(" ", "") == description).OrderByDescending(entity => entity.Id).FirstOrDefault();
                 var latestProductPackingSKU = _dbContext.ProductPackings.Where(entity => entity.Code.Contains(productSKU.Code)).OrderByDescending(entity => entity.Id).FirstOrDefault();

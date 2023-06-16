@@ -156,6 +156,7 @@ using Com.Danliris.Service.Packing.Inventory.Application.ToBeRefactored.GarmentS
 using Com.Danliris.Service.Packing.Inventory.Infrastructure.Repositories.GarmentShipping.SalesExport;
 using Com.Danliris.Service.Packing.Inventory.Application.ToBeRefactored.GarmentShipping.SalesExport;
 using Com.Danliris.Service.Packing.Inventory.Application.ToBeRefactored.DyeingPrintingWarehouse.IN;
+using Com.Danliris.Service.Packing.Inventory.Infrastructure.Repositories.DyeingPrintingWarehouse;
 
 namespace Com.Danliris.Service.Packing.Inventory.WebApi
 {
@@ -290,6 +291,9 @@ namespace Com.Danliris.Service.Packing.Inventory.WebApi
             services.AddTransient<IGarmentShippingExportSalesNoteRepository, GarmentShippingExportSalesNoteRepository>();
             services.AddTransient<IGarmentShippingExportSalesNoteItemRepository, GarmentShippingExportSalesNoteItemRepository>();
             services.AddTransient<IDyeingPrintingStockOpnameSummaryRepository, DyeingPrintingStockOpnameSummaryRepository>();
+            services.AddTransient<IDPWarehousePreInputRepository, DPWarehousePreInputRepository>();
+            services.AddTransient<IDPWarehouseInputRepository, DPWarehouseInputRepository>();
+            services.AddTransient<IDPWarehouseSummaryRepository, DPWarehouseSummaryRepository>();
             #endregion
 
             #region Service

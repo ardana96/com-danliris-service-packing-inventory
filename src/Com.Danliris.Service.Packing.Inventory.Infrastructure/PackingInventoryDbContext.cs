@@ -92,6 +92,7 @@ namespace Com.Danliris.Service.Packing.Inventory.Infrastructure
         public DbSet<DPWarehouseOutputItemModel> DPWarehouseOutputItems { get; set; }
         public DbSet<DPWarehouseMovementModel> DPWarehouseMovements { get; set; }
         public DbSet<DPWarehouseSummaryModel> DPWarehouseSummaries { get; set; }
+        public DbSet<DPWarehousePreInputModel> DPWarehousePreInputs { get; set; }
 
         public DbSet<FabricQualityControlModel> NewFabricQualityControls { get; set; }
         public DbSet<FabricGradeTestModel> NewFabricGradeTests { get; set; }
@@ -342,6 +343,7 @@ namespace Com.Danliris.Service.Packing.Inventory.Infrastructure
             modelBuilder.Entity<DPWarehouseOutputItemModel>().HasQueryFilter(entity => !entity.IsDeleted);
             modelBuilder.Entity<DPWarehouseMovementModel>().HasQueryFilter(entity => !entity.IsDeleted);
             modelBuilder.Entity<DPWarehouseSummaryModel>().HasQueryFilter(entity => !entity.IsDeleted);
+            modelBuilder.Entity<DPWarehousePreInputModel>().HasQueryFilter(entity => !entity.IsDeleted);
             //modelBuilder.Entity<DyeingPrintingAreaOutputAvalItemModel>().HasQueryFilter(entity => !entity.IsDeleted);
 
             modelBuilder.Entity<CategoryModel>().HasQueryFilter(entity => !entity.IsDeleted);
